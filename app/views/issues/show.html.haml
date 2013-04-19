@@ -1,0 +1,27 @@
+#featuresWrapper
+  %h2{ :style => ("background-image: url('" + (image_path @issue.cover.url(:feature)) + "');") }
+    %span.background= @issue.name
+  %ul#features
+    - @issue.articles.each_with_index do |article, i|
+      - featureClass = :feature
+      - if (@issue.articles_with_category("feature").length == 3)
+        - featureClass = :feature
+      - elsif (@issue.articles_with_category("feature").length == 2 && i == 0) || article.has_category("wide")
+        - featureClass = :wide
+      - elsif (@issue.articles_with_category("feature").length == 1) || article.has_category("full")
+        - featureClass = :full
+      %li{ :class => featureClass }
+        %h3
+          %a{ :href => article_path(article), :style => "background-image: url('" + ((article.images.first != nil) ? article.images.first.image.url(featureClass) : (image_path "feature_placeholder2.jpg")) + "')" }
+            %span.background
+              %span.headline= article.headline
+              - if article.lead
+                %span.lead= article.lead
+/ = render :partial => "issues/advertising_horizontal"
+/ #outerWrapper
+/   - @issue.articles_without_category("feature").each_with_index do |article, i|
+/     %h3
+/       %a{ :href => article_path(article), :title => article.headline + (article.lead ? ("\n" + article.lead) : "") }
+/         %span.headline= article.headline
+/         - if article.lead
+/           %span.lead= article.lead

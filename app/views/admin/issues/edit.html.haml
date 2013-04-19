@@ -1,0 +1,38 @@
+%h1
+  Editing issue
+- form_for([:admin, @issue], :html => { :multipart => true }) do |f|
+  = f.error_messages
+  %div.coverArt.large
+    = image_tag @issue.cover.url(:large), @issue.cover_image_tag_options
+  %p
+    = f.label :cover
+    %br
+    = f.file_field :cover
+  %p
+    = f.label :cover_caption
+    %br
+    = f.text_area :cover_caption, :rows => 5
+
+  - fields_for(@contributor) do |cf|
+    = cf.error_messages
+    = hidden_field :contributor, :contributor_type_id
+    %p
+      = cf.label :name
+      %br
+      = cf.text_field :name
+    %p
+      = cf.label :bio
+      %br
+      = cf.text_area :bio, :rows => 5
+
+  %p
+    = f.label :published
+    %br
+    = f.date_select :published, :order => [:month, :day, :year]
+  %p
+    = f.label :show
+    %br
+    = f.check_box :show
+  %p
+    = f.submit 'Update'
+= link_to 'Back', admin_issue_path(@issue)

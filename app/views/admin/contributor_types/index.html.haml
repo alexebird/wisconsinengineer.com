@@ -1,0 +1,18 @@
+%h1
+  Listing contributor_types
+%table
+  %tr
+    %th
+      Name
+  - @contributor_types.each do |contributor_type|
+    %tr
+      %td
+        = h contributor_type.name
+      %td
+        = link_to 'Show', contributor_type
+      %td
+        = link_to 'Edit', edit_contributor_type_path(contributor_type)
+      %td
+        = link_to 'Destroy', contributor_type, :confirm => 'Are you sure?', :method => :delete
+%br
+= link_to 'New contributor_type', new_contributor_type_path

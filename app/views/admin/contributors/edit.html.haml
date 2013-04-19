@@ -1,0 +1,19 @@
+%h1 Edit Contributor
+- form_for([:admin, @article, @contributor]) do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :contributor_type
+    %br
+    = contributor_types_select
+  %p
+    = f.label :bio
+    %br
+    = f.text_area :bio, :rows => 5
+  %p
+    = f.submit 'Update Contributor'
+
+= link_to 'Back', admin_issue_article_path(@issue, @article)

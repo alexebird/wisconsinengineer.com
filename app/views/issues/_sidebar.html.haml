@@ -1,0 +1,9 @@
+#sidebar
+  %dl#articleList
+    %dt
+      = @article.issue.name
+    %dd
+      %ul
+        - @article.issue.articles.each do |a|
+          %li
+            %li= link_to a.headline, article_path(a), :class => ("current" if (a == @article))

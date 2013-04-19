@@ -1,0 +1,568 @@
+// Base Layout
+
+body
+    min-width= !minWidth
+    max-width= !maxWidth
+    margin: 0 auto
+    padding= "0" !margin !margin
+    // Links w/o Underlines
+    #footnotes, #navigation, #adminControls, #sidebar
+        a
+            text-decoration: none
+    // Small text at the bottom of the page (underneath the wrapper)
+    #footnotes
+        margin-top= !margin
+        text-align: center
+
+#header
+    height= !headHeight
+    // Required to keep h1 a and #searchForm from positioning too far apart
+    position: relative
+    h1 a
+        width= !headLogoWidth
+        height= !headLogoHeight
+        position: absolute
+        left= (!margin * 2)
+        top= !headLogoTopMargin
+    #searchForm
+        width= !headSearchWidth
+        height= !headSearchHeight
+        position: absolute
+        right= !headSideMargin - !headSearchMargin
+        top= !headTopMargin
+        overflow: hidden
+        #searchBox
+            +inputReset
+            width: 102px
+            // Makes things look nicer in Firefox
+            height= !fontSizeSm + 2px
+            line-height= !fontSizeSm + 2px
+            margin: 6px 0 6px 13px
+            padding: 0
+        #searchSubmit input
+            width: 44px
+            height: 28px
+            position: absolute
+            right: 0
+            top: 0
+            padding: 0
+            border: 0
+            // IE 7 Fixes
+            font-size: 0px
+            line-height: 0px
+    p
+        // 21px is arbitrary - the background swoosh in the logo makes the image longer
+        width= !headLogoWidth - 21px
+        // Prevents Safari from cutting off the 10px "@" symbol
+        height= !fontSizeTy + 2px
+        line-height= !fontSizeTy + 2px
+        position: absolute
+        left= !headSideMargin
+        top= !headLogoTopMargin + !headLogoHeight
+        text-align: center
+        overflow: hidden
+
+#wrapper
+    // Required for #sidebar and #advertising positioning
+    position: relative
+    padding= !navMargin
+    h2
+        line-height= !lineHeight
+        // Margin + Positioning works in IE7+
+        margin-bottom= !lineHeightPx - !margin
+        position: relative
+        top= -!margin
+        font-size= !fontSizeH2
+        text-align: center
+    h3
+        font-size= !fontSizeLg
+    // Meta information display for author, photographer, etc.
+    .meta
+        font-size= !fontSizeSm
+        text-align: center
+        dt
+            color= !textColorGray
+        dt, dd
+            display: inline
+        dd + dt
+            margin-left= !margin
+
+// Fake shadow for IE 8
+#wrapperShadowIE
+    background: #000
+    background: rgba(0,0,0,0)
+    filter: progid:DXImageTransform.Microsoft.Blur(pixelRadius=2, makeShadow='true', ShadowOpacity=0.10)
+    padding-top: 5px
+    padding-left: 5px
+    margin-top: -5px
+    margin-left: -5px
+
+#navigation, #adminControls
+    display: table
+    width= 100%
+    clear: both
+    margin-bottom= !marginWrap
+    text-align: center
+    li
+        display: table-cell
+        width= 100% / 6
+        overflow: hidden
+    a
+        display: block
+        width: 100%
+        overflow: hidden
+        // Arbitrary
+        // max-width: 172px
+        // 30px looks better in IE
+        line-height= 30px
+        // Makes the navigation buttons full-height (31px)
+        height= 2.214em
+        // (31 / 14) - correctly hides second line with text zoom
+        max-height= 2.214em
+        margin: 0 0 0 auto
+        border-width= !navBorderWidth
+        border-top-style: solid
+    li.first a
+        border-left-style: solid
+    li.last a
+        margin-left= -!navBorderWidth
+        border-right-style: solid
+        
+#adminControls
+    padding= !navMargin / 2
+    li
+        display: inline
+    a
+        +inline-block
+        max-width: 175px
+        height= 30px - 2 * !navMargin
+        line-height= 30px - 2 * !navMargin
+        text-align: center
+        margin= (!navMargin / 2)
+        border-style: solid
+        
+#sidebar
+    width= !sidebarWidth
+    position: absolute
+    left= -!margin
+    margin-right= !marginWrap
+    padding-top= !margin
+    dl
+        padding-bottom= !margin
+    li
+        display: inline
+    dt, dd, dd li a
+        display: block
+        line-height= !sidebarLineHeight
+        padding= !sidebarMargin
+        padding-left= !margin
+    dd ul
+        display: block
+        margin= -!sidebarMargin
+        margin-left= -(!margin * 2)
+    dd, dd li a
+        padding-left= !margin * 2
+    // dd li a
+    //         margin-left= -(!margin * 2)
+    //         margin-right= -!sidebarMargin
+
+#introduction
+    :margin
+        // top=    !navMargin
+        right=  !marginWrap - (!navMargin + !navBorderWidth)
+        left=   !marginWrap - !navMargin
+        bottom= !lineHeightPx
+    p
+        text-align: center
+        // width= 75%
+        margin= "0" !marginWrap * 2.25
+    
+#content, #introduction, #footnotes
+    // MobileSafari-like rounded rectangle around a clicked link
+    a
+        +border-radius(2px)
+        &:focus, &:active
+            padding= !margin / 8
+            margin= -(!margin / 8)
+    // Spacing for elements used in an article
+    h3, p, table, .caption, ul, ol
+        margin-bottom= !lineHeightPx
+
+#introduction p, #content p.intro
+    margin-top= -!lineHeightPx
+    font-size= !fontSizeLg
+    line-height= !lineHeight
+    margin-bottom= !margin * 5/4
+
+#content
+    // margin-left= !sidebarWidth + !marginWrap -(!navMargin + !margin)
+    :margin
+        top:    0
+        right=  !marginWrap - !navMargin
+        left=   !marginWrap - !navMargin
+        bottom= !lineHeightPx
+    line-height= !lineHeight
+    text-align: left
+    // -webkit-transition: margin-right 0.25s ease-in-out
+    min-width= 768px -(!sidebarWidth + !margin + !marginWrap + 2 * !margin + !navMargin)
+    .author
+        color= !textColorGray
+        font-style: italic
+        margin-bottom: 0
+    .caption
+        color= !textColorGray
+        font-size= !fontSizeSm
+        font-style: italic
+        text-align: left
+        img
+            display: block
+            height: auto
+            margin: 0 auto
+            max-width: 100%
+        p
+            margin: 0
+        &.left, &.right
+            max-width: 50%
+            width: 50%
+        &.left
+            +inline-block
+            float: left
+            margin-right= !margin
+        &.right
+            +inline-block
+            float: right
+            margin-left= !margin
+        &.quote
+            font-size= !fontSizeLg
+        &.sidebar, &.author-pic
+            // Fix this
+            float: left
+            width= !sidebarWidth - !marginWrap - !margin
+            position: absolute
+            left= -!sidebarWidth + !margin
+        &.author-pic
+            text-align: right
+            width: none
+
+// View-Specific Styles
+
+body.articles.show #content
+    :margin
+        top:    0
+        right=  !marginWrap + 120px
+        left=   !sidebarWidth + !margin
+        bottom= !lineHeightPx
+    min-height= 600px - !lineHeightPx + !navMargin
+
+#content.sidebar
+    :margin
+        top:    0
+        right=  !marginWrap
+        left=   !sidebarWidth + !margin
+        bottom= !lineHeightPx
+    // min-height= 600px - !lineHeightPx + !navMargin
+
+#advertising.vertical
+    width: 120px
+    margin-left= -(120px)
+    overflow: hidden
+    position: absolute
+    right= !navMargin
+    img
+        display: block
+        margin-bottom= !navMargin
+
+#advertising.horizontal
+    margin-bottom= !navBorderWidth
+    background: #000
+    img
+        display: block
+        margin: 0 auto
+
+body.noVerticalAds
+    &.articles.show #content
+        margin-right= !marginWrap
+    #advertising.vertical
+        display: none
+
+html.admin #content
+    table
+        margin= "0" -(!marginWrap - !navMargin)
+
+table
+    border-left= "1px solid" #999
+    border-top= "1px solid" #999
+    background= !colorNav
+    tr.evenTableRow
+        background= !colorWrap
+    td, th
+        padding= "0" !navMargin
+        border-right= "1px solid" #999
+        border-bottom= "1px solid" #999
+        -webkit-transition: background-color 0.25s ease-in-out
+    th
+        font-weight: normal
+        // +webKitGradient(#fff, #d9d9d9)
+        // +linear-gradient
+    tr[onclick]
+        cursor: pointer
+        &:hover td
+            background-color: rgba(255,212,0,0.2)
+
+#footer
+    clear: both
+    color= !colorBody
+    line-height= !lineHeight
+    text-align: center
+    display: table
+    width= 100%
+    height= !footerHeight
+    background= image_url("bg-footer.gif") "repeat-x"
+    +border-radius(4px)
+    a
+        color= !colorBody
+    div
+        display: table-cell
+        width= 100% / 3
+        vertical-align: middle
+        &#leftInfo
+            text-align: right
+        &#rightInfo
+            text-align: left
+        p
+            max-height= !lineHeightPx
+            overflow: hidden
+            padding= "0" !margin
+    #logo-footer
+        display: block
+        text-indent: -9999px
+        background= image_url("logo-footer.png") "no-repeat left top"
+        width: 270px
+        height: 52px
+        // padding= "0" !margin
+        margin: 0 auto
+        color= !colorWrap
+
+#features, #outerWrapper
+    h3 a
+        text-decoration: none
+    span.background
+        display: block
+        padding= !marginLg "0"
+    span.headline
+        display: block
+        font-weight: normal
+        font-size= !fontSizeLg
+        padding-left= !marginLg
+        padding-right= !marginLg + !margin
+        line-height= !fontSizeLg * 1.5
+        overflow: hidden
+    span.lead
+        display: block
+        padding= (!lineHeightPx - !fontSize) !marginLg "0"
+        font-size= !fontSize
+        line-height= !fontSize
+
+body
+    #featuresWrapper
+        overflow: hidden
+        margin= !navBorderWidth "0"
+        h2, h3 a
+            color= !colorWrap
+        h2
+            height= 100px
+            line-height: 100px
+            margin: 0
+            position: static
+            border-bottom= !navBorderWidth "solid" !colorWrap
+            background-repeat: no-repeat
+            background-position: center top
+            span.background
+                display: block
+                width: 100%
+                height: 100%
+                background= image_url("bg-feature-color.png")
+    #features
+        margin-left: -1px
+        margin-right: -2px
+        margin-top: -2px
+        li
+            height= (200px)
+            width= 100% / 3
+            float: left
+            margin-top: 1px
+        li.wide, li.full
+            width= 100% / 1.5
+            margin-left: -1px
+            span.headline
+                font-size= !fontSizeH3
+        li.full
+            width= 100%
+        h3
+            width: 100%
+            height: 100%
+            background= !colorWrap
+        h3 a
+            // No opacity for IE; IE 8 seemingly makes the bottom and right borders disappear.
+            // IE 8 will not render images that have CMYK colors!
+            // opacity: 0.85
+            // -moz-opacity: 0.85
+            display: block
+            width= 100%
+            height= 100%
+            border: 1px solid #fff
+            // -webkit-transition: opacity 0.25s ease-in-out
+            overflow: hidden
+            position: relative
+            background-position: center
+            background-repeat: no-repeat
+            background-color: #000
+            position: relative
+            span.background
+                background= image_url("bg-feature-color.png")
+                position: absolute
+                bottom: 0
+                width: 100%
+            &.truncated
+                span.headline
+                    background= image_url("headline_more_chevdown.png") "no-repeat right center"
+                &:hover span.headline
+                    background-image= image_url("headline_more_chevdown_hover.png")
+            // Animation Stuff
+            // span.background
+            //     height= !fontSizeLg * 1.5
+            //     -webkit-transition-property: height opacity
+            //     -webkit-transition-duration: 0.25s
+            //     -webkit-transition-timing-function: ease-in-out
+            // span.headline
+            //     height= !fontSizeLg * 1.5
+            //     // white-space: nowrap
+            //     // text-overflow: ellipsis
+            //     -webkit-transition: height 0.25s ease-in-out
+            // span.lead
+            //     +opacity(0)
+            //     -webkit-transition: opacity 0.25s ease-in-out
+            // &:hover
+            //     span.background
+            //         height= 200px - 2 * !marginLg
+            //     span.headline
+            //         height= !fontSizeLg * 3
+            //         white-space: normal
+            //         text-overflow: normal
+            //     span.lead
+            //         +opacity(1)
+            // &:active
+            //     span.background
+            //         +opacity(0.85)
+
+#issueList
+    float: left
+    width: 100%
+    // Apparently IE 7 needs margin-top: 0
+    margin= "0 0 " !marginWrap
+    text-align: center
+    line-height= !lineHeight
+    h3
+        font-size= !fontSizeLg
+    a
+        text-decoration: none
+        float: left
+        +border-radius(8px)
+        width= 100% / 4
+        padding= !margin / 2 "0"
+        // padding= !margin floor(0.125 * !navLinkWidth) !margin ceil(0.125 * !navLinkWidth)
+        // padding= !margin
+        // background: gray
+        // overflow: hidden
+        // white-space: nowrap
+        -webkit-transition: background-color 0.25s ease-in-out
+        // &:focus, &:active
+        //     background= !colorBody
+        //     background= rgba(0,0,0,0.15)
+    ul
+        color= !textColorGray
+    .coverArt
+        margin= !margin / 2 "auto"
+
+.coverArt
+    display: block
+    position: relative
+    width: 100px
+    height: 128px
+    background= image_url("cover.png") "no-repeat center"
+    // padding= (!margin / 2)
+    +box-shadow(rgba(0,0,0,0.35), 0, 2px, 4px)
+    border= "1px solid" !colorNavBorder
+    // border: 1px solid rgba(0,0,0,0.35)
+    // margin= !margin / 2 "auto"
+    img
+        width: inherit
+        height: inherit
+        -webkit-mask= image_url("cover-mask.png") center
+    &.medium
+        width: 200px
+        height: 256px
+        background-image= image_url("cover-medium.png")
+        img
+            -webkit-mask-image= image_url("cover-mask-medium.png")
+    &.large
+        width: 600px
+        height: 768px
+        background-image= image_url("cover-large.png")
+        img
+            -webkit-mask-image= image_url("cover-mask-large.png")
+    .postStatus
+        position: absolute
+        bottom: 0
+        width: inherit
+        
+.postStatus
+    color= !colorWrap
+    line-height= !lineHeight
+    text-align: center
+    border-top: 1px solid rgba(0,0,0,0.65)
+    &.posted
+        // +webKitGradient(#00BF60, #007E3F)
+        background= image_url("bg-posted.gif") "repeat-x #007E3F"
+    &.unposted
+        // +webKitGradient(#BF0020, #7E0015)
+        background= image_url("bg-unposted.gif") "repeat-x #7E0015"
+
+#introduction .postStatus
+    width: 96px
+    +inline-block
+    padding= "0" !lineHeightPx - !fontSizeSm
+    +border-radius(32px)
+    margin-top= -!navMargin
+
+#wrapper .issueSummary
+    .coverArt
+        float: left
+    .meta
+        background: blue
+
+body.issues.latest, body.issues.show
+    #navigation
+        margin-bottom: 0
+        li.first a
+            -webkit-border-bottom-left-radius: 0
+            -moz-border-radius-bottomleft: 0
+            border-bottom-left-radius: 0
+        li.last a
+            -webkit-border-bottom-right-radius: 0
+            -moz-border-radius-bottomright: 0
+            border-bottom-right-radius: 0
+    #footer
+        -webkit-border-top-left-radius: 0
+        -moz-border-radius-topleft: 0
+        border-top-left-radius: 0
+        -webkit-border-top-right-radius: 0
+        -moz-border-radius-topright: 0
+        border-top-right-radius: 0
+
+html.admin
+    #content.sidebar
+        min-height: 278px
+
+#outerWrapper
+    display: none

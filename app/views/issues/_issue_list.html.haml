@@ -1,0 +1,11 @@
+#issueList.iconView
+  - @issues.sort{|a,b| b.published <=> a.published}.each_with_index do |issue,i|
+    %a{ :href => (admin ? admin_issue_path(issue) : issue_path(issue)) }
+      %div.coverArt
+        - if issue.cover?
+          = image_tag issue.cover.url(:small), issue.cover_image_tag_options
+        - if admin
+          .postStatus{:class => (issue.show ? "posted" : "unposted")}= (issue.show ? "Posted" : "Unposted")
+      %h3= h issue.name
+      %ul
+        %li= (issue.articles.size == 0 ? "No" : issue.articles.size.to_s) + " Article" + (issue.articles.size != 1 ? "s" : "")

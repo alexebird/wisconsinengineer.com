@@ -1,0 +1,28 @@
+%h1 Edit Artice Image
+- form_for([:admin, @article, @article_image], :html => { :multipart => true} ) do |f|
+  = f.error_messages
+  = image_tag @article_image.image.url
+  %p
+    = f.label :image
+    %br
+    = f.file_field :image
+  %p
+    = f.label :caption
+    %br
+    = f.text_area :caption, :rows => 5
+
+  - fields_for(@contributor) do |cf|
+    = cf.error_messages
+    = hidden_field :contributor, :contributor_type_id
+    %p
+      = cf.label :name
+      %br
+      = cf.text_field :name
+    %p
+      = cf.label :bio
+      %br
+      = cf.text_area :bio, :rows => 5
+  %p
+    = f.submit 'Update Image'
+
+= link_to 'Back', admin_issue_article_path(@article.issue, @article)

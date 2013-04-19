@@ -1,0 +1,26 @@
+html
+    font-size= !fontSize
+    +text-shadow(rgba(255,255,255,0.35), 0, 1px, 0)
+
+// Gill Sans Text
+html, #searchBox, .meta, span.lead, #issueList ul, .postStatus, table
+    +fontGillSans
+
+#content, h1, h2, h3, h4, h5, h6, #introduction
+    +fontGeorgia
+
+#header p, #footnotes
+    font-size= !fontSizeTy
+
+#navigation, #sidebar, #issueList ul, .postStatus, #adminControls, #searchBox, table
+    font-size= !fontSizeSm
+
+#header p, #footnotes, #navigation, #header p, #sidebar dt, #wrapper .meta, #issueList ul, .postStatus, th, #adminControls, #validation
+    letter-spacing: 1px
+    text-transform: uppercase
+
+#header p, #footer, .postStatus, #navigation li.current a, #sidebar dd li a.current
+    +text-shadow(rgba(0,0,0,0.65), 0, -1px, 0)
+
+#featuresWrapper
+    +text-shadow(rgba(0,0,0,0.65), 0, 1px, 2px)

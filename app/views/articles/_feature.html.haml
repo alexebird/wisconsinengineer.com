@@ -1,0 +1,7 @@
+%li{ :class => (featureClass if featureClass) }
+  %h3
+    %a{ :href => article_path(article), :style => "background-image: url('" + (article.has_category("full") ? article.images.first.image.url(:full) : (article.has_category("wide") ? article.images.first.image.url(:wide) : article.images.first.image.url(:feature))) + "')", :title => article.headline + (article.lead ? ("\n" + article.lead) : "") }
+      %span.background
+        %span.headline= article.headline
+        - if article.lead
+          %span.lead= article.lead

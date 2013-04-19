@@ -1,0 +1,8 @@
+= render :partial => "articles/introduction"
+= render :partial => "issues/sidebar"
+/ = render :partial => "issues/advertising"
+#content
+  = render_article_with_images @article
+  - @article.contributors.each do |c|
+    %p.author
+      = c.bio

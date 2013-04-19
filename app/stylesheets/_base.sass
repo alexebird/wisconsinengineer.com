@@ -1,0 +1,82 @@
+// Typography
+!fontSize = 16px
+!fontSizeTy = !fontSize * 0.625
+!fontSizeSm = !fontSize * 0.875
+!fontSizeLg = !fontSize * 1.25
+!fontSizeH3 = !fontSize * 1.5
+!fontSizeH2 = !fontSize * 2.5
+
+!lineHeight = 150%
+!lineHeightPx = !fontSize * 1.5
+// !lineHeightH2 = !fontSizeH2 * 1.5
+
+// Margins
+!margin = 16px
+!marginLg = !margin * 1.5
+!marginWrap = !margin * 2
+
+// Dimensions
+// Minimum Width: iPad portrait mode width - Mac OS X scrollbar width.
+!minWidth = 768px - !margin * 2
+// Maximum Width: iPad landscape mode width - Mac OS X scrollbar width.
+!maxWidth = 1024px - !margin * 2
+
+!headHeight = 96px
+!headSideMargin = (!margin * 2)
+!headLogoWidth = 489px
+!headLogoHeight = 65px
+!headSearchWidth = 159px
+!headSearchHeight = 28px
+!headSearchMargin = 2px
+!headTopMargin = ((!headHeight - !headSearchHeight) / 2)
+!headLogoTopMargin = floor(((!headHeight - !headLogoHeight - 10px) / 2))
+!headLogoBtmMargin = ceil(((!headHeight - !headLogoHeight - 10px) / 2))
+
+!navMargin = !margin / 4
+!navBorderWidth = 1px
+
+!sidebarWidth = 250px
+!sidebarMargin = !margin / 2
+!sidebarLineHeight = !fontSizeSm + 2px
+
+!footerHeight = 84px
+
+// Colors
+!colorBody = #ccc
+!colorHead = red
+!colorWrap = #fff
+!colorFoot = #333
+
+!textColor = #000
+!textColorDarkGray = #333
+!textColorGray = #666
+!textColorWhite = #fff
+
+!colorNav = #e5e5e5
+!colorNavHover = #ccc
+!colorNavActive = #fff
+!colorNavBorder = #a8a8a8
+!colorNavCurrent = #cc0000
+!colorNavCurrentBorder = #990000
+
+!colorNavAdmin = rgba(255,255,255,0.5)
+!colorNavAdminHover = rgba(204,204,204,0.5)
+
+!colorNavAdminOld = rgba(255,212,0,0.65)
+!colorNavAdminOldHover = rgba(255,212,0,1)
+!colorNavAdminOldActive = rgba(255,212,0,0.2)
+!colorNavAdminOldBorder = #bc9b00
+
+// Mixins
+=fontGeorgia
+    font-family: Georgia, "Times New Roman", Times, serif
+
+=fontGillSans
+    font-family: "Gill Sans", "Gill Sans MT", Helvetica, "Bitstream Vera Sans", Arial, Geneva, sans-serif
+
+=inputReset
+    // Browser-Specific input Styling Resets
+    -webkit-appearance: none
+    +border-radius(0)
+    background: transparent
+    border: 0

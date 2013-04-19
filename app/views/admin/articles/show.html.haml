@@ -1,0 +1,50 @@
+= render :partial => "articles/introduction"
+  
+%ul#adminControls
+  %li= link_to 'Back to Issue', admin_issue_path(@issue)
+  %li= link_to "Edit Article", edit_admin_issue_article_path(@issue, @article)
+  %li.delete= link_to 'Delete Article', admin_issue_article_path(@issue, @article), :confirm => 'Are you sure?', :method => :delete
+  %li.add= link_to "Upload Images", new_admin_article_article_image_path(@article)
+  %li.add= link_to "Add Contributors", new_admin_article_contributor_path(@article)
+#content
+  %ul
+    - @contributors.each do |c|
+      %li
+        = c.name
+        = link_to 'Edit', edit_admin_article_contributor_path(@article, c)
+        = link_to 'Delete', admin_article_contributor_path(@article, c), :confirm => 'Are you sure?', :method => :delete
+  %li
+    Change the article's categories
+    %p
+      - form_tag(admin_article_categories_path(@article)) do
+        = categories_select
+        = submit_tag "Add"
+    %ul
+      - @categories.each do |c|
+        %li
+          = c.name
+          = link_to 'Delete', admin_article_category_path(@article, c), :confirm => 'Are you sure?', :method => :delete
+  %table
+    %tr
+      %th
+      %th Caption
+      %th Name
+      %th Bio
+    %tr
+    - @images.each do |i|
+      %tr
+        %td
+          = image_tag i.image.url(:article)
+        %td
+          = i.caption
+        %td
+          = i.contributors.first.name
+        %td
+          = i.contributors.first.bio
+        %td
+          = link_to 'Edit', edit_admin_article_article_image_path(@article, i)
+        %td
+          = link_to 'Destroy', admin_article_article_image_path(@article, i), :confirm => 'Are you sure?', :method => :delete
+  %hr
+  #previewWrapper
+    = render_article_with_images @article

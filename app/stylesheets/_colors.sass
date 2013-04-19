@@ -1,0 +1,138 @@
+// Anything and everything related to coloring and images, as well as:
+// - text-indent attributes in here if they're used for image replacement
+// - background-position changes for sprited image backgrounds
+// - Cosmetics that do not affect layout, e.g. box-shadow, border-radius, etc.
+
+// Normal Colors
+html
+    background= image_url("bg-header.gif") "repeat-x center top" !colorBody
+    a
+        color= !textColor
+    #footnotes, #footnotes a
+        color= !textColorGray
+    #header
+        h1 a
+            text-indent: -9999px
+            background= image_url("logo-header.png") "no-repeat"
+        p
+            color= !textColorWhite
+        #searchForm, #searchSubmit input
+            background= image_url("search.gif") "no-repeat top right"
+        #searchBox
+            color= !textColor
+            &.placeholder
+                color= !textColorGray
+        #searchSubmit input
+            text-indent: -9999px
+            &:focus
+                background-position: right bottom
+                -ms-background-position-x: -115px
+                -ms-background-position-y: -28px
+            &:active
+                background-position: right bottom
+                -ms-background-position-x: -114px
+                -ms-background-position-y: -27px
+            &:active:focus
+                -ms-background-position-x: -114px
+                -ms-background-position-y: -27px
+    #wrapper
+        +border-radius(8px)
+        +box-shadow(rgba(0,0,0,0.35), 0, 0, 4px)
+        background= !colorWrap
+    #navigation, #adminControls
+        a
+            background= image_url("bg-nav-button.png") "repeat-x center " -!navBorderWidth " " !colorNav
+            // background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0,0,0,0.15)), to(rgba(0,0,0,0.15)), color-stop(0.1,rgba(0,0,0,0)), color-stop(0.2,rgba(0,0,0,0)))
+            // background-color= !colorNav
+            border-color= !colorNavBorder
+            -webkit-transition: background-color 0.25s ease-in-out
+        a:hover, a:focus
+            background-color= !colorNavHover
+        a:active
+            background-color= !colorNavActive
+        li.current a
+            background-color: #cc0000
+            color= !textColorWhite
+            border-color: #990000
+        li.first a
+            -webkit-border-top-left-radius: 4px
+            -webkit-border-bottom-left-radius: 4px
+            -moz-border-radius-topleft: 4px
+            -moz-border-radius-bottomleft: 4px
+            border-top-left-radius: 4px
+            border-bottom-left-radius: 4px
+            border-left-style: solid
+        li.last a
+            -webkit-border-top-right-radius: 4px
+            -webkit-border-bottom-right-radius: 4px
+            -moz-border-radius-topright: 4px
+            -moz-border-radius-bottomright: 4px
+            border-top-right-radius: 4px
+            border-bottom-right-radius: 4px
+    #adminControls
+        +border-radius(8px)
+        background-color: rgba(0,0,0,0.65)
+        a
+            +border-radius(4px)
+            +box-shadow(rgba(0,0,0,0.65), 0, 1px, 2px)
+            background-position: center -2px
+            border-color= !colorNavActive
+        li.add a
+            border-color: #bfffdf
+            background-color: #73e5ac
+            &:hover, &:focus
+                background-color: #66cc99
+            &:active
+                background-color: #bfffdf
+        li.delete a
+            border-color: #ffbfca
+            background-color: #e57386
+            &:hover, &:focus
+                background-color: #cc6677
+            &:active
+                background-color: #ffbfca
+    #sidebar
+        &, dl, dt, dd, dd li a
+            background= image_url("bg-sidebar.png") "no-repeat"
+        dl
+            background-position= -(!sidebarWidth) "bottom"
+        dt
+            color= !textColorGray
+        dt, dd, dd li a
+            background-color= !colorBody
+            background-position= -(!sidebarWidth * 3) " 0"
+            background-repeat: repeat-y
+            -webkit-transition: background-color 0.25s ease-in-out
+        dd li a
+            &:hover, &:focus, &:active, &.current
+                background-position= -(3 * !sidebarWidth) " 0"
+                background-color: #aaa
+            &:active
+                background-color= !colorNav
+            &.current
+                background-color= !colorNavCurrent
+                color= !textColorWhite
+    #content, #introduction, #footnotes, #issueList
+        // MobileSafari-like rounded rectangle around a clicked link
+        a
+            &:focus, &:active
+                background: #d0d0d0
+                background= rgba(0,0,0,0.15)
+
+// Admin Colors
+html.admin
+    background-image= image_url("bg-header-admin.gif")
+    #wrapper
+        background= image_url("bg-content-admin.gif") "center top"
+    #navigation
+        +border-radius(4px)
+        background= image_url("bg-admin.gif") "center " -!navMargin
+        a
+            // background-color: rgba(255,212,0,0.85)
+            background-color= !colorNavAdmin
+        a:hover, a:focus
+            background-color= !colorNavAdminHover
+        a:active
+            background-color= !colorNavActive
+        li.current a
+            background-color: #cc0000

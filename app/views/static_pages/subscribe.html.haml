@@ -1,0 +1,24 @@
+#content
+  #introduction
+    %h2 Subscribe
+  %form{ :method => "post", :action => "https://www.paypal.com/cgi-bin/webscr" }
+    %input{ :name => "cmd", :type => "hidden", :value => "_s-xclick" }
+    %input{ :name => "hosted_button_id", :type => "hidden", :value => "9748423" }
+    %table
+      %tr
+        %td
+          %input{ :name => "on0", :type => "hidden", :value => "Subscription Length" }
+          Subscription Length
+      %tr
+        %td
+          %select{ :name => "os0" }
+            %option{ :value => "4 Issues" }
+              4 Issues $12.00
+            %option{ :value => "8 Issues" }
+              8 Issues $24.00
+    %input{ :name => "currency_code", :type => "hidden", :value => "USD" }
+    %input{ :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif", :border => "0", :type => "image", :alt => "PayPal - The safer, easier way to pay online!" }
+    %img{ :src => "https://www.paypal.com/en_US/i/scr/pixel.gif", :border => "0", :height => "1", :alt => "", :width => "1" }
+  %br
+  %br
+  Please contact us at 608.262.3494 with questions or email us at wiscengr@cae.wisc.edu.

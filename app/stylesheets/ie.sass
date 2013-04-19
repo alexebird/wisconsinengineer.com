@@ -1,0 +1,67 @@
+// Authored by Joe Kohlmann
+// Fixes for Internet Explorer 7
+@import compass/utilities
+@import _css3.sass
+@import _base.sass
+
+body
+    min-width= !maxWidth - 30px
+    max-width= !maxWidth - 30px
+    width= !maxWidth - 30px
+
+#header
+    #searchForm
+        #searchBox
+            line-height= !fontSizeSm
+
+#navigation
+    // float: left
+    li
+        float: left
+    a
+        line-height: 29px
+        
+#footer
+    div
+        float: left
+        &#leftInfo
+            padding= ((!footerHeight - !lineHeightPx * 3) / 2) - 1px "0"
+        &#rightInfo
+            padding= ((!footerHeight - !lineHeightPx * 2) / 2) - 1px "0"
+    #logo-footer
+        margin= !margin "0"
+
+// Really fake 1px border for IE 7 in place of a shadow
+#wrapper
+    border: 1px solid #aeaeae
+    margin: -1px
+
+#features, #outerWrapper
+    span.headline
+        +inline-block
+
+#issueList
+    margin-top= -(!margin / 2)
+    a
+        padding= !margin " 0 " !margin / 2
+
+.coverArt
+    margin= "0 auto " !margin / 2
+
+body.issues.latest
+    #featuresWrapper
+        margin-bottom= 2 * !navBorderWidth
+    #features
+        // border-right: 1px solid red
+        margin-left: 0
+        margin-right: -4px
+        li
+            width= 99.6% / 3
+        li.wide, li.full
+            width= 99.6% / 1.5
+            margin-left: 0
+        li.full
+            width= 99.6%
+        h3 a
+            border-right: 0
+            margin-left: -1px

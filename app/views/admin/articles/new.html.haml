@@ -1,0 +1,19 @@
+%h1 Add Article
+- form_for([:admin, :issue, @article]) do |f|
+  = f.error_messages
+  %p
+    = f.label :headline
+    %br
+    = f.text_field :headline
+  %p
+    = f.label :lead
+    %br
+    = f.text_field :lead
+  %p
+    = f.label :contents
+    %br
+    = f.text_area :contents, :rows => 20, :cols => 100
+  %p
+    = f.submit 'Create'
+
+= link_to 'Back', admin_issue_path(@issue)

@@ -1,0 +1,5 @@
+%ul#navigation
+  %li.first{ :class => ("current" if (request.path_parameters[:controller] == "admin/issues" && request.path_parameters[:action] == "index")) }
+    = link_to "Admin Home", admin_issues_path
+  %li.last
+    = link_to "Logout", "/logout", :id => "logoutLink"

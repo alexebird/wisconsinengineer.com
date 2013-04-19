@@ -1,0 +1,11 @@
+#header
+  %h1
+    %a{ :href => "/" }
+      Wisconsin Engineer Magazine
+  %p= headerText
+  -#= render :partial => 'kickoff'
+  -#%form#searchForm{ :method => "post", :action => "/search/" }
+    %fieldset
+      %input#searchBox{ :name => "searchBox", :type => "text" }
+      #searchSubmit
+        %input{ :value => "Search", :type => "submit" }

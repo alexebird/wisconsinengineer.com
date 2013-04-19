@@ -1,0 +1,34 @@
+/ #content
+/   / %table#issuesTable
+/   /   %tr.tableHeading
+/   /     %th.show      Show
+/   /     %th.issue     Issue
+/   /     %th.published Published
+/   /     %th.articles  Articles
+/   /     %th.cover     Cover
+/   /   - @issues.each_with_index do |issue,i|
+/   /     %tr.dataRow{ :class => (i % 2 == 0 ? "evenTableRow" : "oddTableRow"), :onclick => %Q[document.location = "#{admin_issue_path(issue)}"] }
+/   /       %td{ :class => (issue.show ? "showingYes" : "showingNo") }= issue.show ? "Yes" : "No"
+/   /       %td= h issue.name
+/   /       %td= h issue.published.strftime("%m/%d/%Y")
+/   /       %td= issue.articles.size
+/   /       %td= issue.cover? ? "Yes" : "No"
+/   #introduction
+/     %h2= "All Issues"
+/   #issueList
+/     - @issues.each_with_index do |issue,i|
+/       .issueIconView
+/         %a.coverArt{ :href => admin_issue_path(issue) }
+/           =issue.cover? ? (image_tag issue.cover.url(:thumb), issue.cover_image_tag_options) : ""
+/         %h3
+/           %a{ :href => admin_issue_path(issue) }= h issue.name
+/         %ul
+/           %li= h issue.published.strftime("%m/%d/%Y")
+/           %li= issue.articles.size, " articles"
+/           %li
+/             %a.publishStatus{:class => (issue.show ? "published" : "unpublished")}= (issue.show ? "Published" : "Unpublished")
+#content
+  %h2= "All Issues"
+%ul#adminControls
+  %li= link_to "Create Issue", new_admin_issue_path
+= render :partial => "issues/issue_list", :locals => { :admin => true }

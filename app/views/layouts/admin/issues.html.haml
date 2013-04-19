@@ -1,0 +1,25 @@
+= render :file => "layouts/issues", :locals => { :title => controller.action_name.capitalize }
+
+/ !!! Strict
+/ %html.admin{ :xmlns=> "http://www.w3.org/1999/xhtml" }
+/   %head
+/     %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
+/     %meta{ :name => "viewport", :content=> "width = device-height; maximum-scale = 1.0; minimum-scale = 0.75" }
+/     = stylesheet_link_tag "compiled/screen.css", :media => "screen, projection"
+/     = stylesheet_link_tag "compiled/print.css", :media => "print"
+/     /[if lt IE 8]
+/       = stylesheet_link_tag "compiled/ie.css", :media => "screen, projection"
+/     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"
+/     = javascript_include_tag "helpers"
+/     %title
+/       = "Wisconsin Engineer Magazine - Admin"
+/     / %body{ :class => request.path_parameters['controller'].sub("/", " ") }
+/     %body
+/       = render :partial => "issues/header", :locals => { :headerText => "Administration&nbsp;&middot;&nbsp;alexebird@gmail.com" }
+/       #wrapper
+/         = render :partial => "admin/issues/navigation"
+/         = yield
+/         / = render :partial => "issues/advertising"
+/         = render :partial => "issues/footer"
+/       #footnotes
+/         %a#validation{ :href => "http://validator.w3.org/check?uri=referer" } XHTML 1.0 Strict

@@ -1,0 +1,17 @@
+#introduction
+  %h2
+    = textilize_without_paragraph @article.headline
+  - if @article.lead?
+    %p
+      = textilize_without_paragraph @article.lead
+  %dl.meta
+    - @article.contributors.each do |c|
+      %dt
+        = c.contributor_type.name
+      %dd
+        = c.name
+    %dt
+      Issue
+    %dd
+      = link_to @article.issue.name, @article.issue
+  

@@ -1,0 +1,13 @@
+%ul#navigation
+  %li.first{ :class => ("current" if (request.path_parameters[:controller] == "issues" && request.path_parameters[:action] == "latest")) }
+    = link_to "Home", root_path
+  %li{ :class => ("current" if (request.path_parameters[:controller] == "issues" && request.path_parameters[:action] == "index")) }
+    = link_to "Past Issues", issues_path
+  %li{ :class => ("current" if (request.path_parameters[:controller] == "static_pages" && request.path_parameters[:action] == "subscribe")) }
+    = link_to "Subscribe", :controller => :static_pages, :action => :subscribe
+  %li{ :class=> ("current" if (request.path_parameters[:controller] == "static_pages" && request.path_parameters[:action] == "advertising")) }
+    = link_to "Advertising", :controller => :static_pages, :action => :advertising
+  %li{ :class=> ("current" if (request.path_parameters[:controller] == "static_pages" && request.path_parameters[:action] == "features")) }
+    = link_to "Features", :controller => :static_pages, :action => :features
+  %li.last{ :class=> ("current" if (request.path_parameters[:controller] == "static_pages" && request.path_parameters[:action] == "about")) }
+    = link_to "About Us", :controller => :static_pages, :action => :about

@@ -1,0 +1,55 @@
+#introduction
+  %h2
+    = @issue.name
+    .postStatus{:class => (@issue.show ? "posted" : "unposted")}= (@issue.show ? "Posted" : "Unposted")
+  %dl.meta
+    %dt Published
+    %dd= h @issue.published
+    / %dt Caption
+    / %dd= @issue.cover_caption
+    / %dt Photographer
+    / %dd= h @issue.contributors.first.name
+    / %dt Bio
+    / %dd= h @issue.contributors.first.bio
+%ul#adminControls
+  %li= link_to "Back to Issues", admin_issues_path
+  %li= link_to "Edit Issue", edit_admin_issue_path(@issue)
+  %li.delete= link_to "Delete Issue", admin_issue_path(@issue), :confirm => 'Are you sure?', :method => :delete
+  %li.add= link_to "Add Article", new_admin_issue_article_path(@issue)
+
+#sidebar
+  %dl#articleList
+    %dd
+      .coverArt.medium
+        - if @issue.cover?
+          = image_tag @issue.cover.url(:medium), @issue.cover_image_tag_options
+        / .postStatus{:class => (@issue.show ? "posted" : "unposted")}= (@issue.show ? "Posted" : "Unposted")
+
+#content.sidebar
+  %table#articlesTable
+    %tr
+      / %th
+      /   Issue
+      %th
+        Headline
+      %th
+        Lead
+      %th
+        Contents
+      %th
+        Category
+    - @articles.each_with_index do |article,i|
+      %tr.dataRow{ :class => (i % 2 == 0 ? "evenTableRow" : "oddTableRow"), :onclick => %Q[document.location = "#{admin_issue_article_path(@issue, article)}"] }
+        / %td
+        /   = h article.issue.name
+        %td
+          :textile
+            #{article.headline}
+        %td
+          :textile
+            #{article.lead}
+        %td
+          -#:textile
+          #{article.contents[0..100]}&hellip;
+        %td
+          = h article.categories.join ', '
